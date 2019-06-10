@@ -74,3 +74,4 @@ xargs -I{} mv {} .dotfiles-backup/{}
 - Hacker News Article: https://news.ycombinator.com/item?id=11070797
 - Atlassian blog: https://www.atlassian.com/git/tutorials/dotfiles
 - Another Working Example: https://github.com/Siilwyn/my-dotfiles/tree/master/.my-dotfiles
+- Archlinux Wiki which includes host specific brancing and Filtering: https://wiki.archlinux.org/index.php/Dotfiles#Tracking_dotfiles_directly_with_Git
