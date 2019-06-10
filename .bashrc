@@ -16,8 +16,10 @@ export PATH
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
-# dotgit for git dotfiles
+# dotgit for git dotfiles including autocompletion
 alias dotgit='/usr/bin/git --git-dir=/home/returntrip/.dotgit/ --work-tree=/home/returntrip'
+[ -f "/usr/share/bash-completion/completions/git" ] && source /usr/share/bash-completion/completions/git
+__git_complete dotgit _git
 
 # Interactive cp, mv and rm commands
 alias cp='cp -i'
