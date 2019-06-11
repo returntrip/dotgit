@@ -42,9 +42,10 @@ dotgit push
 
 - Add .dotgit to .gitignore to avoid recursion issues
 
-`echo ".dotgit" >> .gitignore
+`echo ".dotgit" >> .gitignore`
 
 - Clone existing repo into bare repo
+
 `git clone --bare <git-repo-url> $HOME/.dotgit`
 
 - Create alias to use for dotfile processing
@@ -53,7 +54,7 @@ dotgit push
 
 - Checkout the content of the bare repo to the `$HOME` directory
 
-`git checkout`
+`dotgit checkout`
 
 - If an error occurs it is because some files might already exist in the `$HOME` dir. They can be backed up with this script:
 
@@ -63,7 +64,7 @@ dotgit checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
 xargs -I{} mv {} .dotfiles-backup/{}
 ```
 
-- You can now run `git checkout` again
+- You can now run `dotgit checkout` again
 
 - Set a local flag for the dotgit repository to not show untracked files to avoid showing untracked files
 
