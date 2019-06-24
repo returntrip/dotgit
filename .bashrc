@@ -25,3 +25,19 @@ __git_complete dotgit _git
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
+# Coloured diff
+alias diff='diff --color=auto' dmesg='dmesg --color=always'
+# Coloured manpages
+man() {
+    LESS_TERMCAP_md=$'\e[01;31m' \
+    LESS_TERMCAP_me=$'\e[0m' \
+    LESS_TERMCAP_se=$'\e[0m' \
+    LESS_TERMCAP_so=$'\e[01;44;33m' \
+    LESS_TERMCAP_ue=$'\e[0m' \
+    LESS_TERMCAP_us=$'\e[01;32m' \
+    command man "$@"
+}
+# If outside a toolbox use nvim instead of vim
+if [[ "$(hostname)" != "toolbox" ]]; then
+	alias vim='io.neovim.nvim'
+fi
