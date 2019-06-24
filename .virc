@@ -1,0 +1,9 @@
+syntax on " Syntax highlighting
+set autoindent
+set smartindent " indent based on language
+set tabstop=4 " sets spaces number for tab
+set hlsearch " highlights search term
+set incsearch " incremental search as you type
+set undofile " activate undo also if vim was closed
+set errorbells
+set visualbell
