@@ -37,6 +37,8 @@ man() {
     LESS_TERMCAP_us=$'\e[01;32m' \
     command man "$@"
 }
+# Ignore command beginnig with space charater
+export HISTCONTROL=ignoreboth
 # If outside a toolbox use nvim instead of vim
 if [[ "$(hostname)" != "toolbox" ]]; then
 	alias vim='io.neovim.nvim'
