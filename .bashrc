@@ -43,3 +43,8 @@ export HISTCONTROL=ignoreboth
 if [[ "$(hostname)" != "toolbox" ]]; then
 	alias vim='io.neovim.nvim'
 fi
+
+# gpg config with Yubikey
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
