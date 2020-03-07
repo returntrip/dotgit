@@ -25,8 +25,10 @@ __git_complete dotgit _git
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
+
 # Coloured diff
 alias diff='diff --color=auto' dmesg='dmesg --color=always'
+
 # Coloured manpages
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \
@@ -37,7 +39,15 @@ man() {
     LESS_TERMCAP_us=$'\e[01;32m' \
     command man "$@"
 }
+# Ignore command beginning with space charater
+export HISTCONTROL=ignoreboth
+
 # If outside a toolbox use nvim instead of vim
 if [[ "$(hostname)" != "toolbox" ]]; then
 	alias vim='io.neovim.nvim'
 fi
+
+# gpg config with Yubikey
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
