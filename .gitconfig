@@ -1,5 +1,6 @@
 [user]
-	name = Stefano Figura
 	email = stefano@figura.im
+	name = returntrip
+	signingkey = 0xE8D9210D206385D6
 [core]
 	editor = vim
