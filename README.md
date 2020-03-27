@@ -1,6 +1,11 @@
 # Dotfiles tracking using git
 
+## Version
 
+- Initial version. Was created on Fedora Silverblue but should be distro agnostic
+- Minimal customisation. To be kept mostly vanilla in order to be used with other distros
+- Contains `gpg` customisation for YUbikey (pgp/ssh usage)
+- Check other branched for customised version (i.e. Fedora Silverblue with `toolbox`)
 ## First Time Setup
 
 - Initialise bare git repo

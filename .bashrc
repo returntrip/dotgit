@@ -17,7 +17,7 @@ export PATH
 
 # User specific aliases and functions
 # dotgit for git dotfiles including autocompletion
-alias dotgit='/usr/bin/git --git-dir=/home/returntrip/.dotgit/ --work-tree=/home/returntrip'
+alias dotgit='/usr/bin/git --git-dir=/home/$USER/.dotgit/ --work-tree=/home/$USER'
 [ -f "/usr/share/bash-completion/completions/git" ] && source /usr/share/bash-completion/completions/git
 __git_complete dotgit _git
 
@@ -39,13 +39,9 @@ man() {
     LESS_TERMCAP_us=$'\e[01;32m' \
     command man "$@"
 }
+
 # Ignore command beginning with space charater
 export HISTCONTROL=ignoreboth
-
-# If outside a toolbox use nvim instead of vim
-if [[ "$(hostname)" != "toolbox" ]]; then
-	alias vim='io.neovim.nvim'
-fi
 
 # gpg config with Yubikey
 export GPG_TTY="$(tty)"
