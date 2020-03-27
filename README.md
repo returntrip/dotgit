@@ -1,5 +1,9 @@
 # Dotfiles tracking using git
 
+## Version
+
+- Fedora `toolbox` custom version. To be used with Fedora Silverblue
+- Containes tweaks used to better intagrate `toolbox` into my work stream
 
 ## First Time Setup
 
