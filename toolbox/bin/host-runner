@@ -1,0 +1,4 @@
+#!/bin/bash 
+base_bin=$(basename $0)
+executable=$(flatpak-spawn --host which $base_bin)
+exec /usr/bin/flatpak-spawn --host $executable "$@"
