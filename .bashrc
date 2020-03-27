@@ -12,6 +12,32 @@ then
 fi
 export PATH
 
+pathmunge () {
+    case ":${PATH}:" in
+        *:"$1":*)
+            ;;
+        *)
+            if [ "$2" = "after" ] ; then
+                PATH=$PATH:$1
+            else
+                PATH=$1:$PATH
+            fi
+    esac
+}
+
+# User specific environment and startup programs
+# To execute flatpaks without needing `fatpak run` including autocomplete
+pathmunge /var/lib/flatpak/exports/bin after
+pathmunge ~/development/android-studio/bin after
+pathmunge ~/development/flutter/bin after
+pathmunge ~/development/dart-sdk/bin after
+
+# toolbox customisation
+if [[ "$(hostname)" = "toolbox" ]]; then
+    PATH=$(echo $PATH | sed -e 's;:\?/var/lib/flatpak/exports/bin;;' -e 's;/var/lib/flatpak/exports/bin:\?;;')
+#	PATH="~/toolbox/bin:$PATH"
+fi
+
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
@@ -43,9 +69,11 @@ man() {
 export HISTCONTROL=ignoreboth
 
 # If outside a toolbox use nvim instead of vim
-if [[ "$(hostname)" != "toolbox" ]]; then
-	alias vim='io.neovim.nvim'
-fi
+#if [[ "$(hostname)" != "toolbox" ]]; then
+#	alias vim='io.neovim.nvim'
+#fi
+
+alias vim='io.neovim.nvim'
 
 # gpg config with Yubikey
 export GPG_TTY="$(tty)"
