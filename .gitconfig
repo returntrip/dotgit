@@ -3,9 +3,10 @@
 	name = returntrip
 	signingkey = 0xE8D9210D206385D6
 [core]
-    editor = vim
+    editor = io.neovim.nvim
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3
 [mergetool]
 	prompt = false
+	path = nvim
