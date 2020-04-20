@@ -49,8 +49,8 @@ shopt -s checkwinsize
 # Turn on parallel history
 shopt -s histappend
 if [[ -z "$PROMPT_COMMAND" ]] ; then 
-    PROMPT_COMMAND='$PROMPT_COMMAND; history -a'; else
-	PROMPT_COMMAND='history -a'
+    PROMPT_COMMAND="history -a; $PROMPT_COMMAND"; else
+	PROMPT_COMMAND="history -a"
 fi
 
 # Save multi-line commands as one command
