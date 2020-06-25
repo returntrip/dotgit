@@ -1,0 +1,5 @@
+swayidle -w \
+timeout 1 'swaylock -f -c 000000' \
+timeout 600 'swaymsg "output * dpms off"' \
+timeout 1800 'systemctl suspend' \
+resume 'swaymsg "output * dpms on"':w

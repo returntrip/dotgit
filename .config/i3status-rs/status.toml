@@ -1,0 +1,56 @@
+icons = "awesome"
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %d/%m %R"
+
+[[block]]
+block = "disk_space"
+path = "/"
+alias = "/"
+info_type = "free"
+unit = "GB"
+interval = 20
+warning = 20.0
+alert = 10.0
+show_percentage=true
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{Mup}%"
+format_swap = "{SUp}%"
+
+[[block]]
+block = "cpu"
+interval = 1
+info=30
+warning=60
+critical=90
+format = "{utilization}% {frequency}GHz"
+
+[[block]]
+block = "load"
+interval = 1
+format = "{1m}"
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "bluetooth"
+mac = "28:9A:4B:20:49:93"
+
+[[block]]
+block = "net"
+device = "enp5s0"
+ip = true
+interval = 5
+speed_up = false
+speed_down = false
+
+[[block]]
+block = "uptime"
+
+

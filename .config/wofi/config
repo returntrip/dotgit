@@ -1,0 +1,6 @@
+allow_images=true
+term=alacritty
+#key_up=Meta_L-k
+#key_down=Control_R-j
+#key_left=Control_R-h
+#key_down=Control_R-l
