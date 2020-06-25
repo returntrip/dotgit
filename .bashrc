@@ -5,7 +5,12 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-# create pathmunge to avoid path duplications
+# Check if running sway
+#if [[ "$DESKTOP_SESSION" = "sway" ]] ; then
+#    export XDG_CURRENT_DESKTOP=Unity
+#fi
+
+# Create pathmunge to avoid path duplications
 pathmunge () {
     case ":${PATH}:" in
         *:"$1":*)
@@ -94,6 +99,7 @@ fi
 if [[ "$(hostname)" = "toolbox" ]] ; then
     PATH=$(echo $PATH | sed -e 's;:\?/var/lib/flatpak/exports/bin;;' -e 's;/var/lib/flatpak/exports/bin:\?;;')
     pathmunge $HOME/toolbox/bin after
+	export TERM=xterm-256color
 fi
 
 export PATH

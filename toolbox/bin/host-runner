@@ -1,4 +1,5 @@
 #!/bin/bash 
 base_bin=$(basename $0)
-executable=$(flatpak-spawn --host which $base_bin)
+PATH=/var/lib/flatpak/exports/bin:$PATH
+executable=$(flatpak-spawn --env=PATH=$PATH:/var/lib/flatpak/exports/bin --host which $base_bin)
 exec /usr/bin/flatpak-spawn --host $executable "$@"

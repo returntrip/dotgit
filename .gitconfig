@@ -10,3 +10,5 @@
 [mergetool]
 	prompt = false
 	path = nvim
+[color]
+	ui = auto
