@@ -5,11 +5,6 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-# Check if running sway
-#if [[ "$DESKTOP_SESSION" = "sway" ]] ; then
-#    export XDG_CURRENT_DESKTOP=Unity
-#fi
-
 # Create pathmunge to avoid path duplications
 pathmunge () {
     case ":${PATH}:" in
@@ -51,12 +46,10 @@ bind Space:magic-space
 # Update window size after every command 
 shopt -s checkwinsize
 
-# Turn on parallel history
-shopt -s histappend
-if [[ -z "$PROMPT_COMMAND" ]] ; then 
-    PROMPT_COMMAND="history -a; $PROMPT_COMMAND"; else
-	PROMPT_COMMAND="history -a"
-fi
+#if [[ -z "$PROMPT_COMMAND" ]] ; then 
+#    PROMPT_COMMAND="$PROMPT_COMMAND; history -a "; else
+#	PROMPT_COMMAND="history -a"
+#fi
 
 # Save multi-line commands as one command
 shopt -s cmdhist
@@ -104,3 +97,15 @@ fi
 
 export PATH
 unset -f pathmunge
+
+# Turn on parallel history with starship
+# https://github.com/starship/starship/issues/1337#issuecomment-644690560
+# https://github.com/ZeePal/workstation-ubuntu/blob/master/roles/starship/tasks/main.yml#L128
+shopt -s histappend
+eval "$(starship init bash)"
+ function _pre_starship_prompt_commands {
+     local STATUS=$?  # Passthrough the last exit code for starship
+     history -a
+     return $STATUS
+}
+PROMPT_COMMAND="_pre_starship_prompt_commands;starship_precmd"
