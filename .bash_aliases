@@ -1,9 +1,18 @@
 # User specific aliases and functions loaded by `~/.bashrc`
 
 ## addalias function to add aliases to `.bash_aliases` and source the file
-addalias () {
+addalias() {
     printf "alias %s='%s'\n" "$1" "$2" >> ~/.bash_aliases
     source ~/.bash_profile
+}
+
+## ssh start $SHELL if tmux not found
+ssh () {
+    if [ $# -eq 0 ]; then
+        command ssh
+    else
+        command ssh -t "$@" -- 'tmux -u new -A -s 0 2>/dev/null || "$SHELL"'
+    fi
 }
 
 ## Coloured `ls`

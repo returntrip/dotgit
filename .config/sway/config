@@ -275,10 +275,10 @@ for_window [app_id="imv"] floating enable
 assign [title="^Riot"] workspace 2
 
 ### Automatic Window Layout
-for_window [class="Firefox"] layout stacking
+for_window [app_id="firefox"] layout stacking
 
 ## Gaps
 smart_gaps on
-gaps inner 3
+gaps inner 10
 
 include /etc/sway/config.d/*

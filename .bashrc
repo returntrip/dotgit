@@ -68,6 +68,9 @@ export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 
+# Uses vim ad default $EDITOR
+export EDITOR=vim
+
 # User specific environment and startup programs
 ## To execute flatpaks without needing `fatpak run` including autocomplete
 if [[ "$(hostname)" != "toolbox" ]] ; then
