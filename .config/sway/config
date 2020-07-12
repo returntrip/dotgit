@@ -275,7 +275,7 @@ for_window [app_id="imv"] floating enable
 assign [title="^Riot"] workspace 2
 
 ### Automatic Window Layout
-for_window [app_id="firefox"] layout stacking
+for_window [app_id="firefox"] layout tabbed 
 
 ## Gaps
 smart_gaps on
