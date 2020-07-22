@@ -15,8 +15,6 @@ set $term alacritty
 ### Note: pass the final command to swaymsg so that the resulting window can be opened
 ### on the original workspace that the command was run on.
 ###set $menu dmenu_path | dmenu -fn "MensloLSG Normal 13" | xargs swaymsg exec --
-###set $menu dmenu_path | bemenu -fn "MensloLSG Normal 13" | xargs swaymsg exec --
-###set $command dmenu_path | bemenu -fn "MensloLSG Normal 13" | xargs swaymsg exec --
 set $menu dmenu_path | wofi --show drun -i | xargs swaymsg exec --
 set $command dmenu_path | wofi --show dmenu -i | xargs swaymsg exec --
 
@@ -34,6 +32,7 @@ exec swayidle -w \
          timeout 300 'swaylock -f -c 000000' \
          timeout 600 'systemctl suspend' \
          before-sleep 'swaylock -f -c 000000'
+         # Restore lines below when wlroot 1.5 is released
          #timeout 600 'swaymsg "output * dpms off"' \
          #timeout 1800 'systemctl suspend' \
          #     resume 'swaymsg "output * dpms on"' \
@@ -240,7 +239,6 @@ bar {
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
     #status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1;
-
     colors {
         background #323232
         inactive_workspace #32323200 #32323200 #5c5c5c
@@ -253,6 +251,9 @@ bar {
 #}
 
 ## Autostart Applications
+### Polkit (to elevate user rights in GUI apps)
+exec /usr/bin/lxpolkit
+
 ### Foreground Applications
 exec mako
 exec swaymsg "workspace 1; exec alacritty --title MainTerminal"
@@ -264,15 +265,16 @@ exec "flatpak run im.riot.Riot"
 exec "ckb-next --background --close"
 
 ### Floating Windows
-for_window [title="^Riot"] floating enable
+for_window [title="^Element"] floating enable
 for_window [app_id="desktopclient.nextcloud.com.nextcloud"] floating enable
 for_window [class="Steam"] floating enable
 for_window [app_id="ckb-next"] floating enable
+for_window [app_id="gnome-disks"] floating enable
 for_window [app_id="pavucontrol"] floating enable
 for_window [app_id="imv"] floating enable
 
 ### Automatic Window Placement
-assign [title="^Riot"] workspace 2
+assign [title="^Element"] workspace 2
 
 ### Automatic Window Layout
 for_window [app_id="firefox"] layout tabbed 

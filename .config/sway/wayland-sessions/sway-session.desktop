@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Sway Service
+Comment=SirCmpwn's Wayland window manager as a systemd service - `sudo ln -s ~/.config/sway/wayland-sessions/sway-session.desktop /usr/local/share/wayland-sessions/sway-session.desktop`
+Exec=/var/home/returntrip/.local/bin/sway-service.sh
+Type=Application
