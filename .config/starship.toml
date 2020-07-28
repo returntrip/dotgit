@@ -1,8 +1,5 @@
 [character]
-use_symbol_for_status = true
 symbol = "❯❯"
-error_symbol = "❎"
-style_failure = "bold red"
 
 [hostname]
 ssh_only = false

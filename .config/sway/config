@@ -257,30 +257,35 @@ exec /usr/bin/lxpolkit
 ### Foreground Applications
 exec mako
 exec swaymsg "workspace 1; exec alacritty --title MainTerminal"
-#exec swaymsg "workspace
 
 ### Background Applications
 exec "flatpak run org.nextcloud.Nextcloud --background"
 exec "flatpak run im.riot.Riot"
 exec "ckb-next --background --close"
+exec "solaar -w hide"
 
 ### Floating Windows
 for_window [title="^Element"] floating enable
 for_window [app_id="desktopclient.nextcloud.com.nextcloud"] floating enable
 for_window [class="Steam"] floating enable
-for_window [app_id="ckb-next"] floating enable
+for_window [class="ckb-next"] floating enable
 for_window [app_id="gnome-disks"] floating enable
 for_window [app_id="pavucontrol"] floating enable
 for_window [app_id="imv"] floating enable
+for_window [app_id="solaar"] floating enable
 
 ### Automatic Window Placement
 assign [title="^Element"] workspace 2
 
 ### Automatic Window Layout
 for_window [app_id="firefox"] layout tabbed 
+for_window [class="firefox"] layout tabbed 
 
 ## Gaps
 smart_gaps on
 gaps inner 10
+
+## Import DISPLAY variable to systemd/dbus env - needed to fix Flatpak app issues with Firefox not opening up when links are being clicked
+exec "dbus-update-activation-environment --systemd DISPLAY MOZ_DBUS_REMOTE; systemctl --user start sway-session.target"
 
 include /etc/sway/config.d/*

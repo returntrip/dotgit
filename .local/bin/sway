@@ -1,0 +1,11 @@
+#!/bin/bash
+set -a
+if [[ -f $HOME/.config/sway/env ]] ; then
+    . "$HOME/.config/sway/env"
+fi
+set +a
+exec systemd-cat --identifier sway /usr/bin/sway
+set +a
+if [[ -f $HOME/.config/sway/env ]] ; then
+    . "$HOME/.config/sway/env"
+set -a
