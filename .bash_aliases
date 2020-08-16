@@ -10,9 +10,22 @@ addalias() {
 ssh () {
     if [ $# -eq 0 ]; then
         command ssh
+    elif [ $# -gt 1 ]; then
+        command ssh "$@"
     else
-        command ssh -t "$@" -- 'tmux -u new -A -s 0 2>/dev/null || "$SHELL"'
+        command ssh -t "$1" -- 'tmux -u new -A -s 0 2>/dev/null || "$SHELL"'
     fi
+}
+
+## PGP Enc/Dec functions
+secret () {
+        output=~/"${1}".$(date +%s).enc
+        gpg --encrypt --armor --output ${output} -r 0xE8D9210D206385D6 -r stefano@figura.im "${1}" && echo "${1} -> ${output}"
+}
+
+reveal () {
+        output=$(echo "${1}" | rev | cut -c16- | rev)
+        gpg --decrypt --output ${output} "${1}" && echo "${1} -> ${output}"
 }
 
 ## Coloured `ls`
@@ -20,13 +33,13 @@ alias ls='ls --color=auto'
 
 ## Coloured `less`
 export LESS=-R
-#export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
-#export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
-#export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
-#export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
-#export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
-#export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
-#export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
+export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
+export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
+export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
+export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
+export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
+export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export GROFF_NO_SGR=1				   # for gnome-terminal 
 
 ## Coloured `grep`
@@ -58,3 +71,5 @@ alias exip='curl -s https://checkip.amazonaws.com'
 alias fedpkg='toolbox run fedpkg'
 alias koji='toolbox run koji'
 alias rust2rpm='toolbox run rust2rpm'
+alias ranger='toolbox run --container sway ranger'
+alias mpv='toolbox run --container sway mpv'

@@ -30,7 +30,7 @@ output DP-1 resolution 3440x1440 position 3440,0
 ### resumed. It will also lock your screen before your computer goes to sleep.
 exec swayidle -w \
          timeout 300 'swaylock -f -c 000000' \
-         timeout 600 'systemctl suspend' \
+         timeout 1800 'systemctl suspend' \
          before-sleep 'swaylock -f -c 000000'
          # Restore lines below when wlroot 1.5 is released
          #timeout 600 'swaymsg "output * dpms off"' \
@@ -267,11 +267,16 @@ exec "solaar -w hide"
 ### Floating Windows
 for_window [title="^Element"] floating enable
 for_window [app_id="desktopclient.nextcloud.com.nextcloud"] floating enable
+for_window [app_id="com.nextcloud.desktopclient.nextcloud"] floating enable
 for_window [class="Steam"] floating enable
 for_window [class="ckb-next"] floating enable
+for_window [app_id="ckb-next"] floating enable
 for_window [app_id="gnome-disks"] floating enable
 for_window [app_id="pavucontrol"] floating enable
+for_window [app_id="mpv"] floating enable
+for_window [instance="mpv"] floating enable
 for_window [app_id="imv"] floating enable
+for_window [instance="imv"] floating enable
 for_window [app_id="solaar"] floating enable
 
 ### Automatic Window Placement
@@ -286,6 +291,6 @@ smart_gaps on
 gaps inner 10
 
 ## Import DISPLAY variable to systemd/dbus env - needed to fix Flatpak app issues with Firefox not opening up when links are being clicked
-exec "dbus-update-activation-environment --systemd DISPLAY MOZ_DBUS_REMOTE; systemctl --user start sway-session.target"
+exec "dbus-update-activation-environment --systemd DISPLAY MOZ_DBUS_REMOTE MOZ_ENABLE_WAYLAND; systemctl --user start sway-session.target"
 
 include /etc/sway/config.d/*
