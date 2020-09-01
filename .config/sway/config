@@ -14,9 +14,9 @@ set $term alacritty
 ### Your preferred application launcher
 ### Note: pass the final command to swaymsg so that the resulting window can be opened
 ### on the original workspace that the command was run on.
-###set $menu dmenu_path | dmenu -fn "MensloLSG Normal 13" | xargs swaymsg exec --
-set $menu dmenu_path | wofi --show drun -i | xargs swaymsg exec --
-set $command dmenu_path | wofi --show dmenu -i | xargs swaymsg exec --
+#set $menu dmenu_path | dmenu -fn "MensloLSG Normal 13" | xargs swaymsg exec --
+set $menu 'wofi --show dmenu,drun,run | xargs swaymsg exec --'
+#set $command wofi --show run,dmenu | xargs swaymsg exec --
 
 ## Output configuration
 ### Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
@@ -47,15 +47,14 @@ for_window [app_id=".*"] opacity $opacity
   input * xkb_layout "gb,it,se"
 ### Enable numlock
   input * xkb_numlock enable
+### Set compose key
+  input * xkb_options compose:menu
 
-### Example configuration:
-###
-###   input "2:14:SynPS/2_Synaptics_TouchPad" {
-###       dwt enabled
-###       tap enabled
-###       natural_scroll enabled
-###       middle_emulation enabled
-###   }
+### Mouse Input Config 
+input "1133:4122:Logitech_Performance_MX" {
+       dwt enabled
+       natural_scroll disabled
+   }
 
 ### You can get the names of your inputs by running: swaymsg -t get_inputs
 ### Read `man 5 sway-input` for more information about this section.
@@ -73,7 +72,7 @@ for_window [app_id=".*"] opacity $opacity
     bindsym $mod+d exec $menu
 
     # Start your command launcher
-    bindsym $mod+z exec $command
+    #bindsym $mod+z exec $command
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -217,7 +216,10 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 ### Screenshot
-bindsym --release Print exec grim -g \"$(slurp)" - | wl-copy
+##### Select window/area and edit screenshot
+bindsym --release Print exec ~/.config/sway/scripts/swapshot
+##### Select area and copy to clipboard
+bindsym --release $mod+Print exec grim -g \"$(slurp)" - | wl-copy
 
 ### Lock Screen
 bindsym $mod+Mod1+l exec 'swaylock -f -c 000000'
@@ -226,9 +228,9 @@ bindsym $mod+Mod1+l exec 'swaylock -f -c 000000'
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-#bindsym XF86AudioPlay exec playerctl play-pause
-#bindsym XF86AudioNext exec playerctl next
-#bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
 ## Status Bar:
 # Read `man 5 sway-bar` for more information about this section.
@@ -278,6 +280,10 @@ for_window [instance="mpv"] floating enable
 for_window [app_id="imv"] floating enable
 for_window [instance="imv"] floating enable
 for_window [app_id="solaar"] floating enable
+for_window [title="^Firefox - Sharing Indicator"] floating enable
+for_window [title="^Page Info - "] floating enable
+for_window [title="^Bitwarden - Mozilla Firefox"] floating enable
+for_window [window_role="pop-up"] floating enable
 
 ### Automatic Window Placement
 assign [title="^Element"] workspace 2

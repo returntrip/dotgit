@@ -1,7 +1,12 @@
+gtk_dark=true
+always_parse_args=true
 allow_images=true
+allow_markup=true
 term=alacritty
 insensitive=true
-#key_up=Meta_L-k
-#key_down=Control_R-j
-#key_left=Control_R-h
-#key_down=Control_R-l
+key_expand=Control_L-o
+key_up=Up,Control_L-k
+key_down=Down,Control_L-j
+key_left=Left,Control_L-h
+key_right=Right,Control_L-l
+key_exit=Escape,Control_L-bracketleft

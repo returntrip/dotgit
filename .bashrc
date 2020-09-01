@@ -20,9 +20,15 @@ pathmunge () {
 }
 
 # User specific environment
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]] ; then
-    pathmunge $HOME/.local/bin:$HOME/bin
+if ! [[ "$PATH" =~ "$HOME/.local/bin" ]] ; then
+    pathmunge $HOME/.local/bin
 fi
+
+if ! [[ "$PATH" =~ "$HOME/bin" ]] ; then
+    pathmunge $HOME/bin
+fi
+
+
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=

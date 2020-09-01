@@ -1,0 +1,3 @@
+#!/bin/sh
+basename_bin=$(basename $0)
+exec toolbox run --container devenv $basename_bin "$@"

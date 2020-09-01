@@ -1,0 +1,3 @@
+# Temp Fix for Analog Output not show in Sway
+.include /etc/pulse/default.pa
+set-card-profile alsa_card.pci-0000_0f_00.3 output:analog-stereo+input:analog-stereo
