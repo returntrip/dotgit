@@ -18,4 +18,29 @@
 
 # End of https://www.gitignore.io/api/linux
 
+# dotgit repo init directory
 .dotgit
+
+# (Inc/Exc)lude Specifics
+.local/share/containers
+.local/share/flatpak/*
+!.local/share/flatpak/overrides/
+.var/app/*
+!.var/app/io.neovim.nvim/
+.var/app/io.neovim.nvim/*
+!.var/app/io.neovim.nvim/config/
+.local/lib/python3.8
+.cache
+.mozilla
+Desktop
+devel
+Documents
+Downloads
+Games
+Music
+Nextcloud
+Pictures
+Public
+rpmbuild
+Templates
+Videos

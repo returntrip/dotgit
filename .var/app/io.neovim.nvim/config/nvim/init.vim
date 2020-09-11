@@ -23,6 +23,8 @@ set expandtab " On pressing tab, insert 4 spaces
 set undofile " activate undo also if vim was closed
 set errorbells
 set visualbell
+set clipboard+=unnamedplus
+set title
 "" Colors
 set termguicolors "truecolor
 colorscheme  torte

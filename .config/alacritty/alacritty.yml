@@ -135,19 +135,19 @@
     #style: Bold Italic
 font:
   normal:
-    family: MesloLGS NF
+    family: MesloLGS Nerd Font Mono
     style: Regular
 
   bold:
-    family: MesloLGS NF
+    family: MesloLGS Nerd Font Mono
     style: Bold
 
   italic:
-    family: MesloLGS NF
+    family: MesloLGS Nerd Font Mono
     style: Italic
 
   bold_italic:
-    family: monospace
+    family: MesloLGS Nerd Font Mono
     style: Bold Italic
 
   # Point size
@@ -458,7 +458,6 @@ cursor:
   # the style of the active value of the normal cursor.
   #
   # See `cursor.style` for available options.
-  #vi_mode_style: None
   vi_mode_style: None
 
   # If this is `true`, the cursor will be rendered as a hollow box when the

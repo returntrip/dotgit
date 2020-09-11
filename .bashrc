@@ -95,7 +95,7 @@ fi
 ## toolbox path customisation
 if [[ "$(hostname)" = "toolbox" ]] ; then
     PATH=$(echo $PATH | sed -e 's;:\?/var/lib/flatpak/exports/bin;;' -e 's;/var/lib/flatpak/exports/bin:\?;;')
-    pathmunge $HOME/toolbox/bin after
+    pathmunge $HOME/.local/toolbox/bin after
 	export TERM=xterm-256color
 fi
 

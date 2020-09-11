@@ -14,7 +14,7 @@ set $term alacritty
 ### Your preferred application launcher
 ### Note: pass the final command to swaymsg so that the resulting window can be opened
 ### on the original workspace that the command was run on.
-#set $menu dmenu_path | dmenu -fn "MensloLSG Normal 13" | xargs swaymsg exec --
+#set $menu dmenu_path | dmenu -fn "MesloLGS Nerd Font Regular 13" | xargs swaymsg exec --
 set $menu 'wofi --show dmenu,drun,run | xargs swaymsg exec --'
 #set $command wofi --show run,dmenu | xargs swaymsg exec --
 
@@ -234,23 +234,23 @@ bindsym XF86AudioPrev exec playerctl previous
 
 ## Status Bar:
 # Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
-        font pango:DejaVu Sans Mono, MensloLSG 12
-        status_command i3status-rs ~/.config/i3status-rs/status.toml
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    #status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1;
-    colors {
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
+#bar {
+#    position top
+#       font pango:DejaVu Sans Mono, MesloLGS Nerd Font Regular 12
+#       status_command i3status-rs ~/.config/i3status-rs/status.toml
+#   # When the status_command prints a new line to stdout, swaybar updates.
+#   # The default just shows the current date and time.
+#   #status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1;
+#  colors {
+#       background #323232
+#       inactive_workspace #32323200 #32323200 #5c5c5c
+#   }
 }
 
-### Waybar Test
-#bar {
-#    swaybar_command waybar
-#}
+### Waybar
+bar {
+    swaybar_command waybar
+}
 
 ## Autostart Applications
 ### Polkit (to elevate user rights in GUI apps)
@@ -261,16 +261,19 @@ exec mako
 exec swaymsg "workspace 1; exec alacritty --title MainTerminal"
 
 ### Background Applications
-exec "flatpak run org.nextcloud.Nextcloud --background"
+exec "flatpak run com.nextcloud.desktopclient.nextcloud --background"
 exec "flatpak run im.riot.Riot"
 exec "ckb-next --background --close"
 exec "solaar -w hide"
 
 ### Floating Windows
 for_window [title="^Element"] floating enable
-for_window [app_id="desktopclient.nextcloud.com.nextcloud"] floating enable
-for_window [app_id="com.nextcloud.desktopclient.nextcloud"] floating enable
+for_window [class="Element"] floating enable
+for_window [app_id="desktopclient.nextcloud.com.nextcloud"] floating disabled
+for_window [app_id="com.nextcloud.desktopclient.nextcloud"] floating disabled
+for_window [instance="nextcloud"] floating enabled 
 for_window [class="Steam"] floating enable
+for_window [instance="Steam"] floating enable
 for_window [class="ckb-next"] floating enable
 for_window [app_id="ckb-next"] floating enable
 for_window [app_id="gnome-disks"] floating enable
@@ -291,6 +294,9 @@ assign [title="^Element"] workspace 2
 ### Automatic Window Layout
 for_window [app_id="firefox"] layout tabbed 
 for_window [class="firefox"] layout tabbed 
+
+## Font
+font pango:DejaVuSansMono 10, MesloLGS Nerd Font Mono 10
 
 ## Gaps
 smart_gaps on

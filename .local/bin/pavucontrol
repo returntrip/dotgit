@@ -1,1 +1,2 @@
-toolbox-base-runner
+#!/bin/sh
+exec flatpak run org.pulseaudio.pavucontrol "$@"
