@@ -1,0 +1,14 @@
+#!/bin/sh
+home=${HOME}
+volume=$home:$home:rslave 
+workdir=$(pwd -P)
+podman run --rm -it \
+        --volume /run/libvirt:/run/libvirt \
+        --volume $volume \
+        --env 'HOME='$home \
+        --workdir $workdir \
+        --net host \
+        --privileged \
+        --security-opt label=disable \
+        --entrypoint /usr/bin/vagrant \
+        quay.io/returntrip/vagrant:latest $@

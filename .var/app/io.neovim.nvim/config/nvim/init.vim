@@ -15,9 +15,10 @@ let g:vim_markdown_frontmatter = 1  " font matter for YAML format
 let g:vim_markdown_toml_frontmatter = 1  " font matter for TOML format
 let g:vim_markdown_json_frontmatter = 1  " font matter for JSON format
 "" General Improvements
-set mouse=a
+set mouse=a "activates mouse for all modes
 filetype plugin indent on " indentation base on file type
-set tabstop=4 " sets spaces number for tab
+set tabstop=4 " sets space number for tab
+set softtabstop=4 " set space like tabstops for <BS> to function correctly
 set shiftwidth=4 " when indenting with '>', use 4 spaces width 
 set expandtab " On pressing tab, insert 4 spaces
 set undofile " activate undo also if vim was closed
@@ -28,3 +29,6 @@ set title
 "" Colors
 set termguicolors "truecolor
 colorscheme  torte
+
+" for yaml/yml files set 2 spaces
+autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2

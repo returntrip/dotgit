@@ -37,7 +37,7 @@ window#waybar.hidden {
 }
 
 #workspaces button.urgent {
-  border-bottom: 3px solid @yellow;
+  border-bottom: 3px solid @red;
 }
 
 #mode {

@@ -69,8 +69,9 @@ export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 
-# Uses vim ad default $EDITOR
+# Set $EDITOR and $PAGER
 export EDITOR=vim
+export PAGER=less
 
 # User specific environment and startup programs
 ## To execute flatpaks without needing `fatpak run` including autocomplete
@@ -101,6 +102,8 @@ fi
 
 export PATH
 unset -f pathmunge
+
+export CDPATH=/home/returntrip/devel/repos:/home/returntrip/devel/packaging:/home/returntrip/Nextcloud/Documents/Work:/home/returntrip/Nextcloud
 
 # Turn on parallel history with starship
 # https://github.com/starship/starship/issues/1337#issuecomment-644690560
