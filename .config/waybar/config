@@ -3,8 +3,7 @@
 	"modules-left": [
 		"sway/workspaces",
         "sway/mode",
-		"custom/modules-separator",
-        "sway/window"
+		"custom/modules-separator"
 	],
 
 	"modules-center": [
