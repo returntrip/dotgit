@@ -39,17 +39,17 @@ resolution 1920x1200@59.950001Hz
 position -380,-1200
 }
 
-# Home - Surface centered below 3440*1440 display
 output HDMI-A-1 {
 resolution 3440x1440
-position -1280,-1440
+# Home - Surface centered left 3440*1440 display
+position 1080,-720
+# Home - Surface centered below 3440*1440 display
+#position -1280,-1440
+# Home - Surface centered below 1920*1080 display
+#resolution 1920x1080
+#position -380,-1080
 }
 
-# Home - Surface centered below 1920*1800 display
-output HDMI-A-1 {
-resolution 1920x1080
-position -380,-1080
-}
 
 ## Idle configuration
 ### This will lock your screen after 300 seconds of inactivity, then turn off
@@ -57,12 +57,9 @@ position -380,-1080
 ### resumed. It will also lock your screen before your computer goes to sleep.
 exec swayidle -w \
          timeout 300 'swaylock -f -c 000000' \
+         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          timeout 1800 'systemctl suspend' \
          before-sleep 'swaylock -f -c 000000'
-         # Restore lines below when wlroot 1.5 is released
-         #timeout 600 'swaymsg "output * dpms off"' \
-         #timeout 1800 'systemctl suspend' \
-         #     resume 'swaymsg "output * dpms on"' \
 
 ### Set transparency
 set $transparent 0.9
@@ -85,6 +82,11 @@ input "1133:4122:Logitech_Performance_MX" {
        dwt enabled
        natural_scroll disabled
    }
+input "1118:2012:Microsoft_Surface_Type_Cover_Touchpad" {
+       dwt enabled
+       natural_scroll enabled
+       tap enabled
+    }
 
 ### You can get the names of your inputs by running: swaymsg -t get_inputs
 ### Read `man 5 sway-input` for more information about this section.
