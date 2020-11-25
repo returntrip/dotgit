@@ -13,7 +13,7 @@ ssh () {
     elif [ $# -gt 1 ]; then
         command ssh "$@"
     else
-        command ssh -t "$1" -- 'tmux -u new -A -s 0 2>/dev/null || "$SHELL"'
+        command ssh -t "$1" -- 'tmux -u new -A -D -s 0 2>/dev/null || "$SHELL"'
     fi
 }
 
