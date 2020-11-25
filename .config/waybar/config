@@ -33,6 +33,8 @@
 		"custom/modules-separator",
         "custom/uptime",
 		"custom/modules-separator",
+		"battery",
+		"custom/modules-separator",
 	    "tray"
 	],
 
