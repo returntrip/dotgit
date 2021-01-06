@@ -1,0 +1,13 @@
+#!/bin/sh
+home=${HOME}
+volume=$home:$home:rslave 
+workdir=$(pwd -P)
+podman run --rm -it \
+        --volume $volume \
+        --env 'HOME='$home \
+        --workdir $workdir \
+        --net host \
+        -p 1313:1313 \
+        --privileged \
+        --security-opt label=disable \
+        klakegg/hugo:ext-asciidoctor $@
