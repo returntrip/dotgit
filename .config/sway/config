@@ -37,11 +37,11 @@ adaptive_sync off
 ### your displays after another 300 seconds, and turn your screens back on when
 ### resumed. It will also lock your screen before your computer goes to sleep.
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
-         timeout 600 'swaymsg "output * dpms off"' \
-              resume 'swaymsg "output * dpms on"' \
+         timeout 300 'swaylock -f -c 000000' lock 'dunstctl set-paused true' \
+         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          timeout 1800 'systemctl suspend' \
-         before-sleep 'swaylock -f -c 000000'
+         before-sleep 'swaylock -f -c 000000 && dunstctl set-paused true' \
+         unlock 'dunstctl set-paused false'
 
 ### Set transparency
 set $transparent 0.9
@@ -98,16 +98,19 @@ input "1133:4122:Logitech_Performance_MX" {
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
     # Dismiss first notification
-    bindsym $mod+n exec makoctl dismiss
+    #bindsym $mod+n exec makoctl dismiss
+    bindsym $mod+n exec dunstctl close 
     
     # Restore notifications (not active yet, needs new mako)
-    bindsym $mod+period exec makoctl restore
+    #bindsym $mod+period exec makoctl restore
+    bindsym $mod+m exec dunstctl history-pop
 
     # Dismiss all notifications
-    bindsym $mod+Shift+n exec makoctl dismiss -a
+    #bindsym $mod+Shift+n exec makoctl dismiss -a
+    bindsym $mod+Shift+n exec dunstctl close-all
 
-    # Dimiss all notifications (need to understand better)
-    bindsym $mod+Ctrl+n exec makoctl menu wofi -d -p 'Choose Action: '
+    #bindsym $mod+Ctrl+n exec makoctl menu wofi -d -p 'Choose Action: '
+    bindsym $mod+comma exec dunstctl context 
 
 ### Moving around:
 
@@ -231,7 +234,7 @@ bindsym --release Print exec ~/.config/sway/scripts/swapshot
 bindsym --release $mod+Print exec grim -g \"$(slurp)" - | wl-copy
 
 ### Lock Screen
-bindsym $mod+Mod1+l exec 'swaylock -f -c 000000'
+bindsym $mod+Mod1+l exec 'swaylock -f -c 000000 && dunstctl set-paused true; dunstctl set-paused false'
 
 ### Special Keys
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
@@ -266,7 +269,8 @@ bar {
 exec /usr/bin/lxpolkit
 
 ### Foreground Applications
-exec mako
+#exec mako
+exec dunst
 exec swaymsg "workspace 1; exec alacritty --title MainTerminal"
 
 ### Background Applications

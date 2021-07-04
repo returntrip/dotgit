@@ -48,7 +48,7 @@ alias grep='grep --color=auto'
 ## dotgit for git dotfiles including autocompletion
 alias dotgit='/usr/bin/git --git-dir=/home/returntrip/.dotgit/ --work-tree=/home/returntrip'
 [ -f "/usr/share/bash-completion/completions/git" ] && source /usr/share/bash-completion/completions/git
-__git_complete dotgit _git
+__git_complete dotgit _git_main
 
 ## Interactive cp, mv and rm commands
 alias cp='cp -i'
