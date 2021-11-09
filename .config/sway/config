@@ -4,7 +4,7 @@
 
 ## Variables
 ### Logo key. Use Mod1 for Alt.
-set $mod Mod4
+set $mod Mod4 
 ### Home row direction keys, like vim
 set $left h
 set $down j
@@ -25,31 +25,39 @@ set $menu 'wofi --show dmenu,drun,run | xargs swaymsg exec --'
 output * bg ~/Pictures/bards_tale3440x1440.png fill
 ### You can get the names of your outputs by running: swaymsg -t get_outputs
 
-output eDP-1 {
-scale 2
-resolution 2160x1440@59.955002Hz
-subpixel rgb
-position 0,0
-adaptive_sync off
-}
-
 # Office - Surface centered under screen
-output DP-1 {
+output  DP-1 {
 resolution 1920x1200@59.950001Hz
-position -380,-1200
+position 3840,500
 }
 
 output HDMI-A-1 {
-resolution 3440x1440
+resolution 3840x2160@60Hz
 # Home - Surface centered left 3440*1440 display
-position 1080,-720
+#position 1080,-720
 # Home - Surface centered below 3440*1440 display
 #position -1280,-1440
 # Home - Surface centered below 1920*1080 display
 #resolution 1920x1080
 #position -380,-1080
+position 0,0 
 }
 
+# Define outputs
+set $output-primary HDMI-A-1
+set $output-secondary DP-1
+
+# workspace to displays
+workspace 1 output $output-primary
+workspace 2 output $output-primary
+workspace 3 output $output-primary
+workspace 4 output $output-primary
+workspace 5 output $output-primary
+workspace 6 output $output-secodary
+workspace 7 output $output-secondary
+workspace 8 output $output-secondary
+workspace 9 output $output-secondary
+workspace 10 output $output-secondary
 
 ## Idle configuration
 ### This will lock your screen after 300 seconds of inactivity, then turn off
@@ -58,7 +66,7 @@ position 1080,-720
 exec swayidle -w \
          timeout 300 'swaylock -f -c 000000' \
          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         timeout 1800 'systemctl suspend' \
+         #timeout 1800 'systemctl suspend' \
          before-sleep 'swaylock -f -c 000000'
 
 ### Set transparency
@@ -70,8 +78,11 @@ for_window [app_id=".*"] opacity $transparent
 bindsym $mod+t exec 'swaymsg opacity plus .1 > /dev/null || swaymsg opacity set 0.9'
 
 ## Input configuration
+input "1133:8208:Logitech_K800" {
+     xkb_layout "sway_altgr"
+     }
 ### Add keyboard layout
-  input * xkb_layout "gb,it,se"
+#  input * xkb_layout "gb,it,se"
 ### Enable numlock
   input * xkb_numlock enable
 ### Set compose key
@@ -290,18 +301,24 @@ exec /usr/bin/lxpolkit
 
 ### Foreground Applications
 exec mako
-exec swaymsg "workspace 1; exec alacritty --title MainTerminal"
+exec swaymsg "workspace 1; exec alacritty --title PriTerminal"
+exec swaymsg "workspace 1; exec alacritty"
+exec swaymsg "workspace 7; exec alacritty --title SecTerminal"
+exec swaymsg "workspace 7; exec alacritty"
 
-### Background Applications
+## Background Applications
 exec "flatpak run com.nextcloud.desktopclient.nextcloud --background"
-exec "flatpak run im.riot.Riot"
-exec "ckb-next --background --close"
-exec "solaar -w hide"
 exec "nm-applet --indicator"
+exec swaymsg "workspace 6; exec flatpak run im.riot.Riot"
+exec swaymsg "workspace 6; exec flatpak run com.microsoft.Teams"
+exec swaymsg "workspace 6; exec flatpak run com.skype.Client"
 
 ### Floating Windows
 for_window [title="^Element"] floating enable
+for_window [title="^Skype"] floating enable
 for_window [class="Element"] floating enable
+for_window [class="Skype"] floating enable
+for_window [class="Microsoft Teams - Preview"] floating enable
 for_window [app_id="desktopclient.nextcloud.com.nextcloud"] floating disabled
 for_window [app_id="com.nextcloud.desktopclient.nextcloud"] floating disabled
 for_window [instance="nextcloud"] floating enabled 
@@ -322,11 +339,17 @@ for_window [title="^Bitwarden - Mozilla Firefox"] floating enable
 for_window [window_role="pop-up"] floating enable
 
 ### Automatic Window Placement
-assign [title="^Element"] workspace 2
+#assign [title="^Element"] workspace 6
+#assign [title="^Skype"] workspace 6
+#assign [class="^Skype"] workspace 6
+#assign [instance="^skype"] workspace 6
+#assign [title="^Microsoft Teams -"] workspace 6
+#assign [class="^Microsoft Teams -"] workspace 6
+#assign [title="| Microsoft Teams"] workspace 6
 
 ### Automatic Window Layout
-for_window [app_id="firefox"] layout tabbed 
-for_window [class="firefox"] layout tabbed 
+#for_window [app_id="firefox"] layout tabbed 
+#for_window [class="firefox"] layout tabbed 
 
 ## Font
 font pango:DejaVuSansMono 10, MesloLGS Nerd Font Mono 10

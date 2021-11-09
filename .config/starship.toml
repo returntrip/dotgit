@@ -1,5 +1,6 @@
 [character]
-symbol = "❯❯"
+success_symbol = "[❯❯](bold green)"
+error_symbol = "[❯❯](bold red)"
 
 [hostname]
 ssh_only = false
@@ -18,4 +19,4 @@ symbol = " "
 style = "bg:blue fg:bold black"
 when = """ test -e /run/.toolboxenv """
 command = "echo '⬢ toolbox'"
-prefix = ""
+format = ""

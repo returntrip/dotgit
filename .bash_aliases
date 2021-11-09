@@ -8,6 +8,7 @@ addalias() {
 
 ## ssh start $SHELL if tmux not found
 ssh () {
+    TERM=xterm
     if [ $# -eq 0 ]; then
         command ssh
     elif [ $# -gt 1 ]; then

@@ -32,8 +32,8 @@
         "network",
 		"custom/modules-separator",
         "custom/uptime",
-		"custom/modules-separator",
-		"battery",
+		/* "custom/modules-separator", */
+		/* "battery", */
 		"custom/modules-separator",
 	    "tray"
 	],
@@ -156,8 +156,7 @@
     },
 
     "temperature": {
-	    "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:18.3/hwmon",
-        "input-filename": "temp1_input",
+    "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input",
 	    "critical-threshold": 80,
 	    // "format-critical": "{icon} {temperatureC}°C",
 	    "format": "{icon} {temperatureC}°C",
