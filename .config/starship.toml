@@ -15,8 +15,16 @@ style_user = "white"
 [git_branch]
 symbol = " "
 
+#[custom.toolbox]
+#style = "bg:blue fg:bold black"
+#when = """ test -f /var/run/.toolboxenv """
+#command = "echo '⬢ toolbox'"
+#format = ""
+
 [custom.toolbox]
-style = "bg:blue fg:bold black"
-when = """ test -e /run/.toolboxenv """
-command = "echo '⬢ toolbox'"
-format = ""
+style = "fg:bold blue"
+description = "The activated toolbox container"
+command = "echo ${DISTTAG%container}"
+when = """ [[ -f /run/.containerenv && -f /run/.toolboxenv ]] """
+format = "[⬢  $output]($style) "
+disabled = false

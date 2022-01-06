@@ -63,12 +63,21 @@ workspace 10 output $output-secondary
 ### This will lock your screen after 300 seconds of inactivity, then turn off
 ### your displays after another 300 seconds, and turn your screens back on when
 ### resumed. It will also lock your screen before your computer goes to sleep.
+#exec swayidle -w \
+#         timeout 300 'swaylock -f -c 000000' lock 'dunstctl set-paused true' \
+#         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+#         #timeout 1800 'systemctl suspend' \
+#         before-sleep 'swaylock -f -c 000000 && dunstctl set-paused true' \
+#         unlock 'dunstctl set-paused false'
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
-         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         #timeout 1800 'systemctl suspend' \
-         before-sleep 'swaylock -f -c 000000'
-
+    timeout 300 'swaylock -f -c 000000 && dunstctl set-paused true' \
+    #timeout 600 'swaymsg "output * dpms off"' \
+    resume 'dunstctl set-paused false' \
+    #resume 'swaymsg "output * dpms on" && dunstctl set-paused false' \
+    lock 'swaylock -f -c 000000 && dunstctl set-paused true' \
+    before-sleep 'swaylock -f -c 000000 && dunstctl set-paused true' \
+    after-resume 'dunstctl set-paused false' \
+    unlock 'dunstctl set-paused false'
 ### Set transparency
 set $transparent 0.9
 set $opaque 1
@@ -132,16 +141,20 @@ input "1118:2012:Microsoft_Surface_Type_Cover_Touchpad" {
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
     # Dismiss first notification
-    bindsym $mod+n exec makoctl dismiss
+    #bindsym $mod+n exec makoctl dismiss
+    bindsym $mod+n exec dunstctl close
     
     # Restore notifications (not active yet, needs new mako)
-    bindsym $mod+period exec makoctl restore
+    #bindsym $mod+period exec makoctl restore
+    bindsym $mod+m exec dunstctl history-pop
 
     # Dismiss all notifications
-    bindsym $mod+Shift+n exec makoctl dismiss -a
+    #bindsym $mod+Shift+n exec makoctl dismiss -a
+    bindsym $mod+Shift+n exec dunstctl close-all
 
     # Dimiss all notifications (need to understand better)
-    bindsym $mod+Ctrl+n exec makoctl menu wofi -d -p 'Choose Action: '
+    #bindsym $mod+Ctrl+n exec makoctl menu wofi -d -p 'Choose Action: '
+    bindsym $mod+comma exec dunstctl action
 
 ### Moving around:
 
@@ -265,6 +278,8 @@ bindsym --release Print exec ~/.config/sway/scripts/swapshot
 bindsym --release $mod+Print exec grim -g \"$(slurp)" - | wl-copy
 
 ### Lock Screen
+#bindsym $mod+Mod1+l exec 'swaylock -f -c 000000'
+#bindsym $mod+Mod1+l exec 'swaylock -f -c 000000 && dunstctl set-paused true; dunstctl set-paused false'
 bindsym $mod+Mod1+l exec 'swaylock -f -c 000000'
 
 ### Special Keys
@@ -300,7 +315,8 @@ bar {
 exec /usr/bin/lxpolkit
 
 ### Foreground Applications
-exec mako
+#exec mako
+#exec dunst
 exec swaymsg "workspace 1; exec alacritty --title PriTerminal"
 exec swaymsg "workspace 1; exec alacritty"
 exec swaymsg "workspace 7; exec alacritty --title SecTerminal"

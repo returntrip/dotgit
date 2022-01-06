@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 # first import environment variables from the login manager
 systemctl --user import-environment

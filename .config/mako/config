@@ -14,3 +14,8 @@ height=200
 
 [urgency=high]
 text-color=#fcd1d1
+
+[mode=do-not-disturb]
+default-timeout=0
+ignore-timeout=1
+invisible=1
