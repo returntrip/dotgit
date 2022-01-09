@@ -62,7 +62,7 @@ alias diff='diff --color=auto'
 alias dmesg='dmesg --color=always'
 
 ## nvim flatpak
-alias vim='io.neovim.nvim'
+#alias vim='io.neovim.nvim'
 
 ## added by `addalias`
 alias codium='toolbox run --container vscode bash -l -c codium'

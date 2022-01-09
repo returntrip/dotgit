@@ -1,5 +1,8 @@
 # .bashrc
 
+# ble.sh
+[[ $- == *i* ]] && source ~/.local/share/blesh/ble.sh --noattach
+
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
@@ -28,8 +31,6 @@ if ! [[ "$PATH" =~ "$HOME/bin" ]] ; then
     pathmunge $HOME/bin
 fi
 
-
-
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
@@ -44,10 +45,6 @@ set -o noclobber
 
 # Ignore command beginning with space character and duplicated history entries
 HISTCONTROL=ignoreboth
-
-# Enable history expansion with space
-# E.g. typing !!<space> will replace the !! with your last command
-bind Space:magic-space
 
 # Update window size after every command 
 shopt -s checkwinsize
@@ -102,8 +99,8 @@ fi
 
 export PATH
 unset -f pathmunge
-
 export CDPATH=/home/returntrip/devel/repos:/home/returntrip/devel/packaging:/home/returntrip/Nextcloud/Documents/Work:/home/returntrip/Nextcloud
+#WUT?
 
 # Turn on parallel history with starship
 # https://github.com/starship/starship/issues/1337#issuecomment-644690560
@@ -116,3 +113,6 @@ eval "$(starship init bash)"
      return $STATUS
 }
 PROMPT_COMMAND="_pre_starship_prompt_commands;starship_precmd"
+
+# ble.sh
+[[ ${BLE_VERSION-} ]] && ble-attach
