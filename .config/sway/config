@@ -35,8 +35,8 @@ adaptive_sync off
 
 # Office - Surface centered under screen
 output DP-1 {
-resolution 1920x1200@59.950001Hz
-position -380,-1200
+resolution 3840x2160@60Hz
+position -1300,-2160
 }
 
 output HDMI-A-1 {
@@ -50,6 +50,21 @@ position 1080,-720
 #position -380,-1080
 }
 
+# Define outputs
+set $output-primary eDP-1
+set $output-secondary DP-1
+
+# workspace to displays
+workspace 1 output $output-primary
+workspace 2 output $output-primary
+workspace 3 output $output-secondary
+workspace 4 output $output-secondary
+workspace 5 output $output-primary
+workspace 6 output $output-primary
+workspace 7 output $output-secondary
+workspace 8 output $output-secondary
+#workspace 9 output $output-secondary
+#workspace 10 output $output-secondary
 
 ## Idle configuration
 ### This will lock your screen after 300 seconds of inactivity, then turn off
@@ -290,10 +305,13 @@ exec /usr/bin/lxpolkit
 
 ### Foreground Applications
 exec mako
-exec swaymsg "workspace 1; exec alacritty --title MainTerminal"
+exec swaymsg "workspace 3; exec alacritty --title PriTerminal"
+exec swaymsg "workspace 3; exec alacritty"
+exec swaymsg "workspace 5; exec alacritty --title SecTerminal"
 
 ### Background Applications
 exec "flatpak run com.nextcloud.desktopclient.nextcloud --background"
+exec "flatpak run com.skype.Client"
 exec "flatpak run im.riot.Riot"
 exec "ckb-next --background --close"
 exec "solaar -w hide"
@@ -315,14 +333,25 @@ for_window [app_id="mpv"] floating enable
 for_window [instance="mpv"] floating enable
 for_window [app_id="imv"] floating enable
 for_window [instance="imv"] floating enable
+for_window [instance="skype"] floating enable
 for_window [app_id="solaar"] floating enable
 for_window [title="^Firefox - Sharing Indicator"] floating enable
 for_window [title="^Page Info - "] floating enable
 for_window [title="^Bitwarden - Mozilla Firefox"] floating enable
 for_window [window_role="pop-up"] floating enable
 
+### Fullscreen Windows
+for_window [title="^Element"] fullscreen enable
+for_window [class="Element"] fullscreen enable
+for_window [instance="skype"] fullscreen enable
+
+### Focuses Windows
+for_window [title="^Element"] focus
+for_window [class="Element"] focus 
+
 ### Automatic Window Placement
-assign [title="^Element"] workspace 2
+assign [title="^Element"] workspace 1
+assign [instance="^skype"] workspace 2
 
 ### Automatic Window Layout
 for_window [app_id="firefox"] layout tabbed 
