@@ -99,8 +99,11 @@ fi
 
 export PATH
 unset -f pathmunge
-export CDPATH=/home/returntrip/devel/repos:/home/returntrip/devel/packaging:/home/returntrip/Nextcloud/Documents/Work:/home/returntrip/Nextcloud
-#WUT?
+
+# CDPATH
+CDPATH=/home/returntrip/devel:/home/returntrip/devel/repos:/home/returntrip/Nextcloud
+CDPATH=$CDPATH:/home/returntrip/devel/packaging:/home/returntrip/Nextcloud/Documents
+export CDPATH
 
 # Turn on parallel history with starship
 # https://github.com/starship/starship/issues/1337#issuecomment-644690560
