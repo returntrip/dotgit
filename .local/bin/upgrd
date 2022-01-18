@@ -1,0 +1,11 @@
+#!/bin/bash
+
+flatpak -y update
+
+rpm-ostree upgrade
+
+fwupdmgr refresh; fwupdmgr get-updates; fwupdmgr update
+
+toolbox run sudo dnf update -y
+
+toolbox run --container base sudo dnf update -y
