@@ -1,3 +1,9 @@
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+# Obsolete
+
+*N.B.: I am now using `chezmoi` to manage my `dotfiles` @ https://github.com/returntrip/dotfiles*
+
 # Dotfiles tracking using git
 
 ## Version
